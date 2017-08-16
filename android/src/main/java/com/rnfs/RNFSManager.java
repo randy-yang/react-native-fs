@@ -40,6 +40,7 @@ public class RNFSManager extends ReactContextBaseJavaModule {
   private static final String RNFSPicturesDirectoryPath = "RNFSPicturesDirectoryPath";
   private static final String RNFSTemporaryDirectoryPath = "RNFSTemporaryDirectoryPath";
   private static final String RNFSCachesDirectoryPath = "RNFSCachesDirectoryPath";
+  private static final String RNFSDatabasesDirectoryPath = "RNFSDatabasesDirectoryPath";
   private static final String RNFSDocumentDirectory = "RNFSDocumentDirectory";
 
   private static final String RNFSFileTypeRegular = "RNFSFileTypeRegular";
@@ -676,8 +677,10 @@ public class RNFSManager extends ReactContextBaseJavaModule {
   public Map<String, Object> getConstants() {
     final Map<String, Object> constants = new HashMap<>();
 
+    String filesAbsolutePath = this.getReactApplicationContext().getFilesDir().getAbsolutePath();
     constants.put(RNFSDocumentDirectory, 0);
-    constants.put(RNFSDocumentDirectoryPath, this.getReactApplicationContext().getFilesDir().getAbsolutePath());
+    constants.put(RNFSDocumentDirectoryPath, filesAbsolutePath);
+    constants.put(RNFSDatabasesDirectoryPath, filesAbsolutePath.replaceAll("files$", "databases")); // replace files to databases
     constants.put(RNFSTemporaryDirectoryPath, null);
     constants.put(RNFSPicturesDirectoryPath, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
     constants.put(RNFSCachesDirectoryPath, this.getReactApplicationContext().getCacheDir().getAbsolutePath());
